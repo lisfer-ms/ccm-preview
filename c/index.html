@@ -27,6 +27,7 @@
     .progress{animation:grow linear both;animation-timeline:scroll(root)}
     @keyframes grow{to{transform:scaleX(1)}}
   }
+  .no-sda .progress{display:none}
 
   .cursor{position:fixed;left:0;top:0;width:10px;height:10px;border-radius:50%;background:var(--amarelo);pointer-events:none;z-index:300;transform:translate(-50%,-50%);transition:width .25s,height .25s,background .25s,border .25s;mix-blend-mode:difference}
   .cursor.anel{width:52px;height:52px;background:transparent;border:1.5px solid var(--amarelo);mix-blend-mode:normal}
@@ -57,7 +58,7 @@
   .instrumento .titulo h1{font-family:var(--display);font-weight:800;font-size:clamp(1.9rem,4.4vw,3.4rem);margin:14px 0 0;color:var(--giz)}
   .instrumento .titulo h1 em{font-style:italic;font-weight:500;color:var(--amarelo)}
   .instrumento .titulo .eyebrow{color:var(--ciano)}
-  .instrumento .instrucao{position:absolute;bottom:5vh;left:0;right:0;text-align:center;z-index:3;pointer-events:none;font-weight:300;font-style:italic;font-size:.85rem;color:var(--giz-2)}
+  .instrumento .instrucao{position:absolute;bottom:5vh;left:0;right:0;text-align:center;z-index:3;pointer-events:none;font-weight:300;font-style:italic;font-size:.85rem;color:#C6C9D6;text-shadow:0 1px 12px rgba(0,0,0,.95)}
   .instrumento .instrucao b{font-style:normal;font-weight:600;color:var(--amarelo)}
 
   /* dossiê */
@@ -287,6 +288,7 @@
 'use strict';
 var REDUZ=matchMedia('(prefers-reduced-motion: reduce)').matches;
 var FINO=matchMedia('(pointer: fine)').matches;
+if(!CSS.supports('animation-timeline: view()'))document.documentElement.classList.add('no-sda');
 function vis(el,on,off){var io=new IntersectionObserver(function(es){es.forEach(function(e){e.isIntersecting?on(e):off&&off(e)})},{threshold:.18});io.observe(el);return io}
 document.querySelectorAll('.rv').forEach(function(el){vis(el,function(){el.classList.add('in')})});
 

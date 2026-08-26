@@ -35,6 +35,7 @@
     .progress{animation:grow linear both;animation-timeline:scroll(root)}
     @keyframes grow{to{transform:scaleX(1)}}
   }
+  .no-sda .progress{display:none}
 
   /* capa */
   .capa{background:var(--preto-real);color:var(--giz);padding:130px 0 90px;position:relative;overflow:hidden}
@@ -113,9 +114,13 @@
   @supports (animation-timeline: view()){
     .d-giant .g1{animation:gL linear both;animation-timeline:view();animation-range:entry 0% exit 100%}
     .d-giant .g2{animation:gR linear both;animation-timeline:view();animation-range:entry 0% exit 100%}
-    @keyframes gL{from{transform:translateX(6%)}to{transform:translateX(-9%)}}
-    @keyframes gR{from{transform:translateX(9%)}to{transform:translateX(-6%)}}
+    @keyframes gL{from{transform:translateX(14%)}to{transform:translateX(-18%)}}
+    @keyframes gR{from{transform:translateX(18%)}to{transform:translateX(-14%)}}
   }
+  .no-sda .d-giant .g1{animation:gLf 7s ease-in-out infinite alternate}
+  .no-sda .d-giant .g2{animation:gRf 7s ease-in-out infinite alternate}
+  @keyframes gLf{from{transform:translateX(8%)}to{transform:translateX(-10%)}}
+  @keyframes gRf{from{transform:translateX(-8%)}to{transform:translateX(10%)}}
 
   /* L-07 máscara */
   .d-mask{width:78%;aspect-ratio:16/7;background:linear-gradient(120deg,var(--azul) 55%,var(--vermelho) 55.2%);clip-path:inset(0 100% 0 0)}
@@ -130,7 +135,8 @@
   .d-part-hint{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);font-weight:300;font-style:italic;font-size:.72rem;color:var(--giz-2)}
 
   /* L-09 horizontal */
-  .d-horiz{width:100%;height:100%;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+  .d-horiz{width:100%;height:100%;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;cursor:grab}
+  .d-horiz.arrastando{cursor:grabbing;scroll-snap-type:none}
   .d-horiz::-webkit-scrollbar{display:none}
   .d-horiz article{
     flex:0 0 62%;scroll-snap-align:start;display:flex;align-items:flex-end;padding:18px;
@@ -152,11 +158,15 @@
     @keyframes pv2{from{transform:translateY(55%)}to{transform:translateY(-55%)}}
     @keyframes pv3{from{transform:translateY(85%)}to{transform:translateY(-85%)}}
   }
+  .no-sda .d-par .p1{animation:pf 6s ease-in-out infinite alternate;--a:14%}
+  .no-sda .d-par .p2{animation:pf 4.5s ease-in-out infinite alternate;--a:26%}
+  .no-sda .d-par .p3{animation:pf 3.6s ease-in-out infinite alternate;--a:34%}
+  @keyframes pf{from{transform:translateY(var(--a))}to{transform:translateY(calc(var(--a) * -1))}}
 
   /* L-11 cursor demo area */
   .d-cursor{width:100%;height:100%;display:flex;align-items:center;justify-content:center;gap:26px;cursor:none}
   .d-cursor a{color:var(--giz);font-weight:600;font-size:.85rem;border:1px solid var(--risco-inv);padding:.8em 1.4em;text-decoration:none;cursor:none}
-  .fake-cursor{position:absolute;width:10px;height:10px;background:var(--amarelo);border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);transition:width .2s,height .2s;z-index:5}
+  .fake-cursor{position:absolute;width:10px;height:10px;background:var(--amarelo);border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);transition:width .2s,height .2s,opacity .2s;z-index:5;opacity:0}
   .fake-cursor.grande{width:54px;height:54px;background:transparent;border:1.5px solid var(--amarelo)}
   .fake-cursor .lbl{position:absolute;left:50%;top:100%;transform:translate(-50%,8px);font-weight:600;font-size:.6rem;letter-spacing:.18em;color:var(--amarelo);white-space:nowrap}
 
@@ -357,7 +367,7 @@
         </div>
 
         <div class="item" style="grid-column:1/-1">
-          <div class="stage" style="aspect-ratio:16/6"><canvas class="d-part" data-l08></canvas><span class="d-part-hint">arraste o scroll da página — ou clique na cena — para ver sinal → código → conexão → sentido</span></div>
+          <div class="stage" style="aspect-ratio:16/6"><canvas class="d-part" data-l08></canvas><span class="d-part-hint">role a página — ou clique na cena — para ver sinal → código → conexão → sentido</span></div>
           <div class="meta">
             <div class="titulo"><span class="id">L-08</span><h3>Cena presa (scrub de conceito)</h3></div>
             <div class="linhas"><span><b>técnica</b> · sticky + canvas 2D, partículas com alvo por estágio</span><span><b>custo</b> <span class="custo">●●○</span></span><span class="aparece"><i class="va">A</i></span></div>
@@ -460,7 +470,7 @@
             <svg class="d-blob" viewBox="0 0 640 360" aria-hidden="true">
               <path fill="#2A3390" data-morph
                 d="M320 60c80-30 180 4 208 78 26 70-18 152-88 182-72 30-160 8-204-52-46-62-16-146 40-186 14-10 29-16 44-22Z"
-                data-alt="M300 80c90-44 196-10 224 62 30 76-30 168-110 188-78 20-158-24-190-92-30-66 10-124 76-158Z"/>
+                data-alt="M310 74c86-36 188-2 214 68 28 66-8 156-82 190-76 34-168 6-210-56-44-58-14-140 44-182 12-9 24-14 34-20Z"/>
               <path fill="#ED2D32" data-morph
                 d="M150 240c36-16 80 0 94 34 12 32-8 70-42 80-36 10-74-10-84-46-9-32 6-56 32-68Z"
                 data-alt="M140 230c30-26 84-18 104 16 20 32 2 78-34 92-34 12-72-8-84-44-10-30 0-46 14-64Z" opacity=".95"/>
@@ -721,9 +731,10 @@ document.querySelectorAll('[data-l11]').forEach(function(area){
   var cur=area.querySelector('.fake-cursor'), lx=0,ly=0,tx=0,ty=0,ativo=false;
   area.addEventListener('pointermove',function(e){
     var r=area.getBoundingClientRect();tx=e.clientX-r.left;ty=e.clientY-r.top;
-    if(!ativo){ativo=true;loop()}
+    cur.style.opacity=1;
+    if(!ativo){ativo=true;lx=tx;ly=ty;loop()}
   });
-  area.addEventListener('pointerleave',function(){ativo=false});
+  area.addEventListener('pointerleave',function(){ativo=false;cur.style.opacity=0});
   area.querySelectorAll('a').forEach(function(a){
     a.addEventListener('pointerenter',function(){cur.classList.add('grande');cur.innerHTML='<span class="lbl">'+a.textContent+'</span>'});
     a.addEventListener('pointerleave',function(){cur.classList.remove('grande');cur.innerHTML=''});
@@ -733,6 +744,16 @@ document.querySelectorAll('[data-l11]').forEach(function(area){
     cur.style.left=lx+'px';cur.style.top=ly+'px';
     if(ativo)requestAnimationFrame(loop);
   }
+});
+
+/* ---------- L-09 arrastar com mouse ---------- */
+document.querySelectorAll('.d-horiz').forEach(function(faixa){
+  if(!FINO)return;
+  var baixo=false,x0=0,s0=0;
+  faixa.addEventListener('pointerdown',function(e){baixo=true;x0=e.clientX;s0=faixa.scrollLeft;faixa.classList.add('arrastando');faixa.setPointerCapture(e.pointerId)});
+  faixa.addEventListener('pointermove',function(e){if(baixo)faixa.scrollLeft=s0-(e.clientX-x0)});
+  ['pointerup','pointercancel'].forEach(function(ev){faixa.addEventListener(ev,function(){baixo=false;faixa.classList.remove('arrastando')})});
+  faixa.addEventListener('wheel',function(e){if(Math.abs(e.deltaY)>Math.abs(e.deltaX)){faixa.scrollLeft+=e.deltaY;e.preventDefault()}},{passive:false});
 });
 
 /* ---------- L-12 magnético ---------- */

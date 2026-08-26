@@ -28,11 +28,12 @@
     .progress{animation:grow linear both;animation-timeline:scroll(root)}
     @keyframes grow{to{transform:scaleX(1)}}
   }
+  .no-sda .progress{display:none}
 
   /* L-22 trilho */
   .rail{position:fixed;right:22px;top:50%;transform:translateY(-50%);z-index:60;display:grid;gap:13px}
   @media(max-width:1200px){.rail{display:none}}
-  .rail a{display:flex;align-items:center;gap:9px;flex-direction:row-reverse;text-decoration:none;color:var(--giz-2);font-weight:600;font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;opacity:.75}
+  .rail a{display:flex;align-items:center;gap:9px;flex-direction:row-reverse;text-decoration:none;color:var(--giz-2);font-weight:600;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;opacity:.85}
   .rail a i{width:18px;height:1.5px;background:currentColor;transition:width .3s}
   .rail a.aqui{color:var(--amarelo);opacity:1}
   .rail a.aqui i{width:34px}
@@ -86,7 +87,7 @@
   .btn-fantasma:hover{border-color:var(--vermelho);color:#ff6b6e}
 
   .ticker{border-top:1px solid var(--risco-inv);border-bottom:1px solid var(--risco-inv);background:var(--preto-real)}
-  .ticker .wrap{display:flex;align-items:center;gap:1.3em;flex-wrap:wrap;justify-content:center;padding:15px 26px;font-weight:600;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--giz-2)}
+  .ticker .wrap{display:flex;align-items:center;gap:1.3em;flex-wrap:wrap;justify-content:center;padding:15px 26px;font-weight:600;font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--giz-2)}
   .ticker .sig{color:var(--giz)} .ticker .arr{color:var(--amarelo);font-weight:400}
 
   section{padding:96px 0}
@@ -131,9 +132,9 @@
   .cena .palco{position:sticky;top:0;height:100vh;overflow:hidden}
   #cenaCv{position:absolute;inset:0;width:100%;height:100%}
   .cena .legenda{position:absolute;left:0;right:0;bottom:9vh;text-align:center;pointer-events:none}
-  .cena .legenda .passo{font-family:var(--display);font-style:italic;font-weight:500;font-size:1rem;color:var(--amarelo)}
-  .cena .legenda h3{margin:.25em 0 .2em;font-family:var(--display);font-weight:800;font-size:clamp(1.6rem,4vw,2.6rem);color:var(--giz)}
-  .cena .legenda p{margin:0 auto;max-width:46ch;color:var(--giz-2);font-size:.95rem;padding:0 26px}
+  .cena .legenda .passo{font-family:var(--display);font-style:italic;font-weight:500;font-size:1.05rem;color:var(--amarelo);text-shadow:0 1px 16px rgba(0,0,0,.9)}
+  .cena .legenda h3{margin:.25em 0 .2em;font-family:var(--display);font-weight:800;font-size:clamp(1.6rem,4vw,2.6rem);color:var(--giz);text-shadow:0 1px 18px rgba(0,0,0,.9)}
+  .cena .legenda p{margin:0 auto;max-width:46ch;color:#C6C9D6;font-size:.95rem;padding:0 26px;text-shadow:0 1px 12px rgba(0,0,0,.95)}
   .cena .titulo-cena{position:absolute;top:12vh;left:0;right:0;text-align:center;pointer-events:none}
   .cena .titulo-cena .eyebrow{color:var(--ciano)}
   .cena .dica{position:absolute;bottom:2.5vh;left:0;right:0;text-align:center;font-weight:300;font-style:italic;font-size:.75rem;color:var(--giz-2);opacity:.8}
@@ -188,7 +189,7 @@
   .who .tag{font-weight:700;font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--azul)}
   .who h3{margin:2px 0 0;font-family:var(--display);font-weight:700;font-size:1.5rem;line-height:1.15}
   .who p{margin:0;color:var(--tinta-2);font-size:.95rem}
-  .who .uses{margin-top:12px;padding-top:14px;border-top:1px solid var(--risco);font-weight:600;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--tinta-2);line-height:2}
+  .who .uses{margin-top:12px;padding-top:14px;border-top:1px solid var(--risco);font-weight:600;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--tinta-2);line-height:2}
 
   /* provas — contadores L-19 */
   .provas{padding:64px 0;border-top:1px solid var(--risco);background:var(--branco);color:var(--tinta)}
@@ -355,7 +356,6 @@
         data-alt="M400 50c96-40 214 6 244 92 28 80-24 172-104 204-78 30-168 6-224-56-58-64-58-152 0-208 26-24 52-20 84-32Z" opacity=".92"/>
       <path fill="#ED2D32" data-morph
         d="M170 320c44-10 90 14 100 56 10 40-18 82-60 92-44 10-88-16-98-58-10-42 16-80 58-90Z"
-        d-alt=""
         data-alt="M160 310c50-24 104 2 116 48 12 44-22 90-70 96-46 6-90-28-94-74-4-40 14-56 48-70Z" opacity=".95"/>
     </svg>
     <div class="wrap">
@@ -497,6 +497,7 @@
 'use strict';
 var REDUZ=matchMedia('(prefers-reduced-motion: reduce)').matches;
 var FINO=matchMedia('(pointer: fine)').matches;
+if(!CSS.supports('animation-timeline: view()'))document.documentElement.classList.add('no-sda');
 
 function vis(el,on,off){var io=new IntersectionObserver(function(es){es.forEach(function(e){e.isIntersecting?on(e):off&&off(e)})},{threshold:.18});io.observe(el);return io}
 
@@ -658,7 +659,7 @@ document.querySelectorAll('[data-mag]').forEach(function(btn){
       var gx=(i%cols+.5)/cols*W*.84+W*.08, gy=(Math.floor(i/cols)+.5)/lin*H*.5+H*.16;
       var alvoTexto=texto[i%texto.length];
       pts.push({
-        e0:[Math.random()*W,Math.random()*H],
+        e0:[Math.random()*W,Math.random()*H*.74],
         e1:[gx,gy],
         e4:[alvoTexto[0],alvoTexto[1]],
         destaque:Math.random()<.08,
