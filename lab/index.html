@@ -626,7 +626,7 @@ document.querySelectorAll('[data-l03]').forEach(function(el){
 /* ---------- L-07 fallback ---------- */
 if(document.documentElement.classList.contains('no-sda')){
   document.querySelectorAll('[data-l07]').forEach(function(el){
-    quandoVisivel(el,function(){el.classList.add('on')});
+    quandoVisivel(el.closest('.stage')||el,function(){el.classList.add('on')});
   });
 }
 

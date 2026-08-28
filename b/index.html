@@ -375,7 +375,7 @@ var FINO=matchMedia('(pointer: fine)').matches;
 function vis(el,on,off){var io=new IntersectionObserver(function(es){es.forEach(function(e){e.isIntersecting?on(e):off&&off(e)})},{threshold:.18});io.observe(el);return io}
 
 document.querySelectorAll('.rv').forEach(function(el){vis(el,function(){el.classList.add('in')})});
-document.querySelectorAll('.passo').forEach(function(el,i){vis(el,function(){setTimeout(function(){el.classList.add('mask-in')},i*90)})});
+(function(){var ps=document.querySelector('.passos');if(!ps)return;vis(ps,function(){ps.querySelectorAll('.passo').forEach(function(el,i){setTimeout(function(){el.classList.add('mask-in')},i*90)})})})();
 
 /* cursor */
 (function(){

@@ -567,7 +567,7 @@ function vis(el,on,off){var io=new IntersectionObserver(function(es){es.forEach(
 
 /* reveals */
 document.querySelectorAll('.rv').forEach(function(el){vis(el,function(){el.classList.add('in')})});
-document.querySelectorAll('[data-mask] .panel').forEach(function(el){vis(el,function(){el.classList.add('mask-in')})});
+document.querySelectorAll('[data-mask]').forEach(function(g){vis(g,function(){g.querySelectorAll('.panel').forEach(function(p){p.classList.add('mask-in')})})});
 
 /* hero split (L-01) */
 (function(){
