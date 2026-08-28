@@ -833,7 +833,7 @@ document.querySelectorAll('[data-count]').forEach(function(el){
   },3400);
 })();
 
-/* form → FormSubmit (machado@wiz.ag, cc vanessa/vanessayadoya/cintia @wiz.ag) */
+/* form → FormSubmit (contato@wiz.ag, cc vanessa/vanessayadoya/cintia/machado @wiz.ag) */
 (function(){
   var form=document.getElementById('lead-form'),msg=document.getElementById('form-msg'),btn=form.querySelector('button[type=submit]');
   form.addEventListener('submit',function(e){
@@ -842,12 +842,12 @@ document.querySelectorAll('[data-count]').forEach(function(el){
     if(!form.nome.value.trim()||!form.email.value.trim()){msg.textContent='Preencha nome e e-mail para continuar.';return}
     if(!form.lgpd.checked){msg.textContent='Precisamos do seu consentimento (LGPD) para entrar em contato.';return}
     msg.textContent='Enviando…';btn.disabled=true;
-    fetch('https://formsubmit.co/ajax/machado@wiz.ag',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({
-      _subject:'Novo lead — Cultural Code Map',_template:'table',_cc:'vanessa@wiz.ag,vanessayadoya@wiz.ag,cintia@wiz.ag,contato@wiz.ag',
+    fetch('https://formsubmit.co/ajax/contato@wiz.ag',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({
+      _subject:'Novo lead — Cultural Code Map',_template:'table',_cc:'vanessa@wiz.ag,vanessayadoya@wiz.ag,cintia@wiz.ag,machado@wiz.ag',
       nome:form.nome.value.trim(),email:form.email.value.trim(),empresa:form.empresa.value.trim(),perfil:form.perfil.value,mensagem:form.mensagem.value.trim(),consentimento_lgpd:'sim'})})
     .then(function(r){if(!r.ok)throw 0;return r.json()})
     .then(function(){msg.textContent='✓ Recebido! Vamos te escrever em breve.';form.reset()})
-    .catch(function(){msg.innerHTML='Não foi possível enviar agora — escreva para <a href="mailto:machado@wiz.ag" style="color:var(--ciano)">machado@wiz.ag</a>.'})
+    .catch(function(){msg.innerHTML='Não foi possível enviar agora — escreva para <a href="mailto:contato@wiz.ag" style="color:var(--ciano)">contato@wiz.ag</a>.'})
     .finally(function(){btn.disabled=false});
   });
 })();
