@@ -510,7 +510,7 @@
           <p class="rv">Diga o que você quer explorar.</p>
           <div class="sig-mini rv">cultura em movimento<br>para criar estratégias<br>com significado</div>
         </div>
-        <form id="lead-form" novalidate action="https://formsubmit.co/contato@wiz.ag" method="POST">
+        <form id="lead-form" novalidate action="https://formsubmit.co/c92474bebdd60a06f94cd84becaa2d6c" method="POST">
           <input type="hidden" name="_next" value="https://culturalcodemap.com/?enviado=1#contato">
           <input type="hidden" name="_subject" value="Novo lead — Cultural Code Map">
           <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="position:absolute;left:-5000px" aria-hidden="true">
@@ -556,7 +556,7 @@ var REDUZ=matchMedia('(prefers-reduced-motion: reduce)').matches;
 var FINO=matchMedia('(pointer: fine)').matches;
 if(!CSS.supports('animation-timeline: view()'))document.documentElement.classList.add('no-sda');
 
-/* form → FormSubmit (contato@wiz.ag, cc vanessa/vanessayadoya/cintia/machado @wiz.ag) */
+/* form → FormSubmit via hash-alias */
 (function(){
   var form=document.getElementById('lead-form'),msg=document.getElementById('form-msg'),btn=form.querySelector('button[type=submit]');
   form.addEventListener('submit',function(e){
@@ -565,7 +565,7 @@ if(!CSS.supports('animation-timeline: view()'))document.documentElement.classLis
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.value.trim())){msg.classList.add('erro');msg.textContent='Confira o e-mail digitado.';return}
     if(!form.lgpd.checked){msg.classList.add('erro');msg.textContent='Precisamos do seu consentimento (LGPD) para entrar em contato.';return}
     msg.classList.remove('erro');msg.textContent='Enviando…';btn.disabled=true;
-    fetch('https://formsubmit.co/ajax/contato@wiz.ag',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({
+    fetch('https://formsubmit.co/ajax/c92474bebdd60a06f94cd84becaa2d6c',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({
       _subject:'Novo lead — Cultural Code Map',_template:'table',_honey:form._honey.value,_cc:'vanessa@wiz.ag,vanessayadoya@wiz.ag,cintia@wiz.ag,machado@wiz.ag',
       nome:form.nome.value.trim(),email:form.email.value.trim(),empresa:form.empresa.value.trim(),perfil:form.perfil.value||'não informado',mensagem:form.mensagem.value.trim(),consentimento_lgpd:'sim'})})
     .then(function(r){if(!r.ok)throw 0;return r.json()})
