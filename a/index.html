@@ -63,11 +63,16 @@
   .topbar nav a:hover{color:var(--giz)}
   .topbar .cta{color:var(--preto);background:var(--amarelo);padding:.55em 1.1em;font-weight:600}
   @media(max-width:760px){.topbar nav a:not(.cta){display:none}}
+  .coleta{display:flex;align-items:center;gap:9px;font-weight:300;font-style:italic;font-size:.76rem;color:var(--giz-2);white-space:nowrap}
+  .coleta b{font-weight:600;font-style:italic;color:var(--ciano);min-width:16ch}
+  .coleta .vivo{width:7px;height:7px;border-radius:50%;background:var(--ciano);animation:pisca 2.2s infinite;flex:none}
+  @keyframes pisca{0%,100%{opacity:1}50%{opacity:.25}}
+  @media(max-width:1080px){.coleta{display:none}}
 
   /* hero */
   .hero{position:relative;min-height:94vh;display:flex;align-items:center;overflow:hidden}
   #ceu{position:absolute;inset:0;width:100%;height:100%}
-  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,var(--preto) 24%,rgba(11,11,13,.55) 58%,rgba(11,11,13,.08) 100%);pointer-events:none}
+  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,var(--preto) 17%,rgba(11,11,13,.42) 55%,rgba(11,11,13,.04) 100%);pointer-events:none}
   .hero .wrap{position:relative;z-index:2;padding-top:120px;padding-bottom:90px}
   .hero h1{font-family:var(--display);font-weight:800;font-size:clamp(2.5rem,6vw,4.6rem);line-height:1.04;margin:24px 0 0;max-width:14ch;text-wrap:balance}
   .hero h1 em{font-style:italic;font-weight:500;color:var(--amarelo)}
@@ -148,7 +153,6 @@
   .mq{overflow:hidden;white-space:nowrap;display:flex}
   .mq>div{display:inline-flex;gap:.7em;padding-right:.7em;animation:mq 22s linear infinite;font-family:var(--display);font-weight:700;font-size:clamp(1.6rem,3.6vw,2.6rem);color:var(--giz)}
   .mq.rev>div{animation-direction:reverse;color:var(--giz-2)}
-  .mq:hover>div{animation-play-state:paused}
   .mq em{font-style:italic;font-weight:500;color:var(--ciano)}
   .mq.rev em{color:var(--amarelo)}
   @keyframes mq{to{transform:translateX(-50%)}}
@@ -189,6 +193,7 @@
   .who .tag{font-weight:700;font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--azul)}
   .who h3{margin:2px 0 0;font-family:var(--display);font-weight:700;font-size:1.5rem;line-height:1.15}
   .who p{margin:0;color:var(--tinta-2);font-size:.95rem}
+  .who.full{grid-column:1/-1}
   .who .uses{margin-top:12px;padding-top:14px;border-top:1px solid var(--risco);font-weight:600;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--tinta-2);line-height:2}
 
   /* provas — contadores L-19 */
@@ -197,8 +202,9 @@
   .provas .num{text-align:center}
   .provas b{font-family:var(--display);font-weight:800;font-size:2.8rem;font-variant-numeric:tabular-nums;display:block;line-height:1}
   .provas span{font-weight:300;font-style:italic;font-size:.82rem;color:var(--tinta-2)}
-  .provas .clientes{width:100%;display:flex;flex-wrap:wrap;gap:16px 44px;justify-content:center;margin-top:8px}
-  .provas .clientes i{font-style:normal;font-weight:700;font-size:1rem;letter-spacing:.05em;opacity:.45}
+  .provas .clientes{width:100%;display:flex;flex-wrap:wrap;gap:18px 38px;justify-content:center;align-items:baseline;margin-top:26px;padding-top:34px;border-top:1px solid var(--risco)}
+  .provas .clientes-titulo{width:100%;text-align:center;font-weight:600;font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:var(--azul);margin-bottom:6px}
+  .provas .clientes i{font-style:normal;font-weight:700;font-size:1.06rem;letter-spacing:.04em;color:var(--tinta);opacity:.8}
 
   /* manifesto + grão L-17 */
   .manifesto{background:var(--preto);text-align:center;padding:130px 0;position:relative}
@@ -227,7 +233,7 @@
 
 
   .divisor-onda{background:var(--branco);line-height:0}
-  .divisor-onda svg{width:100%;height:clamp(50px,9vw,110px);display:block}
+  .divisor-onda svg{width:100%;height:clamp(50px,9vw,110px);display:block;margin-bottom:-2px}
   .flutua{animation:ww-flutua 11s ease-in-out infinite alternate}
   @keyframes ww-flutua{from{transform:translateY(-1.2%)}to{transform:translateY(1.6%)}}
   @media (prefers-reduced-motion: reduce){.flutua{animation:none}}
@@ -253,21 +259,23 @@
 <div class="progress" aria-hidden="true"></div>
 <div class="cursor" aria-hidden="true"><span class="lbl"></span></div>
 
-<nav class="rail" aria-label="Jornada">
-  <a href="#top" class="aqui"><i></i><span>Sinal</span></a>
-  <a href="#produto"><i></i><span>Tema</span></a>
-  <a href="#entregas"><i></i><span>Tensão</span></a>
-  <a href="#cena"><i></i><span>Comportamento</span></a>
-  <a href="#demo"><i></i><span>Narrativa</span></a>
-  <a href="#contato"><i></i><span>Oportunidade</span></a>
+<nav class="rail" aria-label="Seções">
+  <a href="#top" class="aqui"><i></i><span>Início</span></a>
+  <a href="#produto"><i></i><span>A ferramenta</span></a>
+  <a href="#entregas"><i></i><span>Entregas</span></a>
+  <a href="#cena"><i></i><span>Como funciona</span></a>
+  <a href="#demo"><i></i><span>Na prática</span></a>
+  <a href="#quem"><i></i><span>Para quem</span></a>
+  <a href="#contato"><i></i><span>Explorar</span></a>
 </nav>
 
 <header class="topbar">
   <div class="wrap">
     <a class="wordmark" href="#top">CULTURAL <b>CODE</b> MAP</a>
+    <div class="coleta" aria-live="off"><span class="vivo"></span>coletando dados culturais — <b id="leituraAlvo">conversas nas redes</b></div>
     <nav>
-      <a href="#produto">O produto</a>
-      <a href="#demo">Veja em ação</a>
+      <a href="#produto">A ferramenta</a>
+      <a href="#cena">Como funciona</a>
       <a href="#quem">Para quem</a>
       <a class="cta" href="#contato" data-cursor="conversar">Fale com a gente</a>
     </nav>
@@ -357,7 +365,6 @@
   </section>
 
   <section class="on-dark interlude">
-    <svg class="blobs flutua" viewBox="0 0 560 315" aria-hidden="true"><path d="M174.0 -0.5C171.2 0.8 171.6 3.4 171.5 7.0C171.4 10.6 173.3 17.3 173.5 21.0C173.7 24.7 179.8 20.5 172.5 29.0C165.2 37.5 136.7 63.3 129.5 72.0C122.3 80.7 128.8 78.8 129.5 81.0C130.2 83.2 128.9 85.4 134.0 85.5C139.1 85.6 154.7 82.2 160.0 81.5C165.3 80.8 164.6 80.9 166.0 81.5C167.4 82.1 168.2 82.8 168.5 85.0C168.8 87.2 168.2 91.8 167.5 95.0C166.8 98.2 166.3 100.0 164.5 104.0C162.7 108.0 159.5 114.2 156.5 119.0C153.5 123.8 151.4 127.6 146.5 133.0C141.6 138.4 135.8 145.2 127.0 151.5C118.2 157.8 103.0 164.3 94.0 170.5C85.0 176.7 79.2 183.7 73.0 188.5C66.8 193.3 64.3 195.7 57.0 199.5C49.7 203.3 38.6 208.4 29.0 211.5C19.4 214.6 4.4 214.9 -0.5 218.0C-5.4 221.1 -1.6 227.9 -0.5 230.0C0.6 232.1 1.8 231.6 6.0 230.5C10.2 229.4 15.7 225.5 25.0 223.5C34.3 221.5 50.3 220.7 62.0 218.5C73.7 216.3 88.2 211.7 95.0 210.5C101.8 209.3 101.2 210.8 103.0 211.5C104.8 212.2 104.8 212.9 105.5 215.0C106.2 217.1 105.7 221.2 107.5 224.0C109.3 226.8 115.0 229.3 116.5 232.0C118.0 234.7 117.5 236.0 116.5 240.0C115.5 244.0 111.5 251.2 110.5 256.0C109.5 260.8 109.2 262.7 110.5 269.0C111.8 275.3 117.1 286.4 118.5 294.0C119.9 301.6 117.8 311.1 119.0 314.5C120.2 317.9 124.6 314.9 126.0 314.5C127.4 314.1 127.2 314.1 127.5 312.0C127.8 309.9 126.0 314.8 127.5 302.0C129.0 289.2 134.8 252.3 136.5 235.0C138.2 217.7 138.0 206.8 137.5 198.0C137.0 189.2 134.7 185.3 133.5 182.0C132.3 178.7 127.5 182.0 130.5 178.0C133.5 174.0 144.5 166.0 151.5 158.0C158.5 150.0 166.8 138.7 172.5 130.0C178.2 121.3 181.7 114.8 185.5 106.0C189.3 97.2 193.2 82.8 195.5 77.0C197.8 71.2 197.4 72.6 199.0 71.5C200.6 70.4 203.0 70.3 205.0 70.5C207.0 70.7 207.3 72.2 211.0 72.5C214.7 72.8 222.7 73.0 227.0 72.5C231.3 72.0 232.7 71.5 237.0 69.5C241.3 67.5 247.8 64.2 253.0 60.5C258.2 56.8 266.4 50.4 268.5 47.0C270.6 43.6 266.4 41.2 265.5 40.0C264.6 38.8 266.8 36.8 263.0 39.5C259.2 42.2 247.7 53.0 243.0 56.5C238.3 60.0 238.2 59.5 235.0 60.5C231.8 61.5 227.5 62.3 224.0 62.5C220.5 62.7 218.0 62.5 214.0 61.5C210.0 60.5 202.9 57.9 200.0 56.5C197.1 55.1 197.9 56.2 196.5 53.0C195.1 49.8 192.3 40.5 191.5 37.0C190.7 33.5 191.0 33.8 191.5 32.0C192.0 30.2 194.0 28.8 194.5 26.0C195.0 23.2 195.2 18.8 194.5 15.0C193.8 11.2 191.6 5.6 190.5 3.0C189.4 0.4 190.8 0.1 188.0 -0.5C185.2 -1.1 176.8 -1.8 174.0 -0.5Z" fill="#2A3390" fill-rule="evenodd" /><path d="M392.0 -0.5C391.6 2.8 394.4 9.2 398.5 19.0C402.6 28.8 412.7 48.7 416.5 58.0C420.3 67.3 420.3 69.0 421.5 75.0C422.7 81.0 423.3 90.7 423.5 94.0C423.7 97.3 422.8 92.5 422.5 95.0C422.2 97.5 422.5 104.7 421.5 109.0C420.5 113.3 417.1 118.8 416.5 121.0C415.9 123.2 416.8 123.0 418.0 122.5C419.2 122.0 421.9 120.6 423.5 118.0C425.1 115.4 426.5 112.0 427.5 107.0C428.5 102.0 429.0 91.3 429.5 88.0C430.0 84.7 430.3 90.8 430.5 87.0C430.7 83.2 430.7 69.5 430.5 65.0C430.3 60.5 430.3 63.0 429.5 60.0C428.7 57.0 428.7 53.5 425.5 47.0C422.3 40.5 414.3 28.7 410.5 21.0C406.7 13.3 404.1 4.6 402.5 1.0C400.9 -2.6 402.8 -0.2 401.0 -0.5C399.2 -0.8 392.4 -3.8 392.0 -0.5Z" fill="#ED2D32" fill-rule="evenodd" /><path d="M284.0 3.5C279.5 3.8 276.0 5.8 270.0 6.5C264.0 7.2 251.9 6.9 248.0 7.5C244.1 8.1 245.8 9.2 246.5 10.0C247.2 10.8 244.4 12.2 252.0 12.5C259.6 12.8 284.2 11.2 292.0 11.5C299.8 11.8 297.1 13.2 299.0 14.5C300.9 15.8 301.8 15.4 303.5 19.0C305.2 22.6 306.8 30.2 309.5 36.0C312.2 41.8 316.2 47.3 319.5 54.0C322.8 60.7 327.5 70.7 329.5 76.0C331.5 81.3 331.2 82.8 331.5 86.0C331.8 89.2 331.8 92.2 331.5 95.0C331.2 97.8 330.2 101.2 329.5 103.0C328.8 104.8 327.6 105.2 327.5 106.0C327.4 106.8 328.0 108.2 329.0 107.5C330.0 106.8 332.2 105.4 333.5 102.0C334.8 98.6 336.0 91.8 336.5 87.0C337.0 82.2 337.0 77.0 336.5 73.0C336.0 69.0 336.7 68.8 333.5 63.0C330.3 57.2 321.8 46.3 317.5 38.0C313.2 29.7 310.2 18.2 307.5 13.0C304.8 7.8 302.8 7.9 301.0 6.5C299.2 5.1 299.8 5.0 297.0 4.5C294.2 4.0 288.5 3.2 284.0 3.5Z" fill="#ED2D32" fill-rule="evenodd" /><path d="M344.0 -0.5C342.7 -0.3 343.1 -0.1 343.5 1.0C343.9 2.1 345.2 2.2 346.5 6.0C347.8 9.8 348.5 16.5 351.5 24.0C354.5 31.5 361.2 43.3 364.5 51.0C367.8 58.7 370.0 63.5 371.5 70.0C373.0 76.5 373.3 86.5 373.5 90.0C373.7 93.5 372.7 89.8 372.5 91.0C372.3 92.2 373.2 94.5 372.5 97.0C371.8 99.5 368.9 104.2 368.5 106.0C368.1 107.8 369.2 107.7 370.0 107.5C370.8 107.3 372.4 106.8 373.5 105.0C374.6 103.2 375.8 100.3 376.5 97.0C377.2 93.7 377.2 87.2 377.5 85.0C377.8 82.8 378.3 87.5 378.5 84.0C378.7 80.5 379.2 69.5 378.5 64.0C377.8 58.5 377.7 57.5 374.5 51.0C371.3 44.5 363.3 33.5 359.5 25.0C355.7 16.5 354.1 4.2 351.5 0.0C348.9 -4.2 345.3 -0.7 344.0 -0.5Z" fill="#ED2D32" fill-rule="evenodd" /><path d="M252.0 23.5C248.8 23.5 244.8 24.7 242.0 25.5C239.2 26.3 238.2 27.8 235.0 28.5C231.8 29.2 225.2 29.1 223.0 29.5C220.8 29.9 221.2 30.3 221.5 31.0C221.8 31.7 223.1 33.1 225.0 33.5C226.9 33.9 229.7 34.0 233.0 33.5C236.3 33.0 241.0 31.0 245.0 30.5C249.0 30.0 253.8 29.4 257.0 30.5C260.2 31.6 262.1 33.1 264.5 37.0C266.9 40.9 268.2 47.5 271.5 54.0C274.8 60.5 281.8 70.7 284.5 76.0C287.2 81.3 287.0 82.2 287.5 86.0C288.0 89.8 287.8 96.2 287.5 99.0C287.2 101.8 285.6 102.2 285.5 103.0C285.4 103.8 286.2 104.3 287.0 103.5C287.8 102.7 289.9 102.4 290.5 98.0C291.1 93.6 290.8 81.7 290.5 77.0C290.2 72.3 291.0 74.3 288.5 70.0C286.0 65.7 279.2 57.5 275.5 51.0C271.8 44.5 268.9 35.2 266.5 31.0C264.1 26.8 263.4 26.8 261.0 25.5C258.6 24.2 255.2 23.5 252.0 23.5Z" fill="#ED2D32" fill-rule="evenodd" /></svg>
     <div class="wrap">
       <span class="eyebrow rv">Cultura não é só entretenimento</span>
       <h2 class="rv">Cultura não é apenas o que assistimos. É o que damos significado.</h2>
@@ -400,11 +407,11 @@
     <div class="wrap">
       <p class="pull rv">Marcas não competem apenas por atenção. <em>Competem por relevância.</em> Quem entende a cultura antes, encontra espaços de relevância antes.</p>
       <span class="eyebrow rv">Para quem</span>
-      <h2 class="rv">O que você quer fazer com a cultura?</h2>
+      <h2 class="rv">Os caminhos que o mapa cultural pode abrir para você.</h2>
 
       <div class="who-grid">
         <div class="who rv" data-tilt><div class="brilho"></div>
-          <span class="tag">Marcas</span><h3>Encontrar relevância.</h3>
+          <span class="tag">Marcas</span><h3>Construir relevância.</h3>
           <p>Identificar territórios culturais, oportunidades de posicionamento e novos espaços de conexão.</p>
           <span class="uses">Posicionamento · Inovação · Conteúdo · Comunicação · Patrocínios</span>
         </div>
@@ -414,7 +421,7 @@
           <span class="uses">Planejamento · Criação · Conteúdo · Tendências</span>
         </div>
         <div class="who rv" data-tilt><div class="brilho"></div>
-          <span class="tag">Criadores</span><h3>Encontrar o que está ganhando significado.</h3>
+          <span class="tag">Criadores</span><h3>Dar voz ao que ganha significado.</h3>
           <p>Descobrir temas, comportamentos e conversas que podem alimentar conteúdo e comunidades.</p>
           <span class="uses">Pautas · Formatos · Comunidades · Collabs</span>
         </div>
@@ -422,6 +429,11 @@
           <span class="tag">Artistas</span><h3>Traduzir o espírito do tempo.</h3>
           <p>Explorar tensões e movimentos culturais como matéria-prima para criação.</p>
           <span class="uses">Repertório · Pesquisa · Inspiração · Criação</span>
+        </div>
+        <div class="who full rv" data-tilt><div class="brilho"></div>
+          <span class="tag">Institutos</span><h3>Revelar o que está mobilizando.</h3>
+          <p>Mapear comportamentos, narrativas, movimentos e causas que expressam as transformações da sociedade.</p>
+          <span class="uses">Pesquisa · Tendências · Comportamento · Causas · Insights</span>
         </div>
       </div>
     </div>
@@ -433,12 +445,13 @@
       <div class="num rv"><b data-count="84">0</b><span>fontes de cultura mapeadas</span></div>
       <div class="num rv"><b>milhões</b><span>de sinais em leitura contínua</span></div>
       <div class="clientes rv">
-        <i>Google</i><i>SUNO</i><i>Casas Bahia</i><i>Eudora</i><i>Ambev</i>
+        <span class="clientes-titulo">Leituras culturais já entregues para</span>
+        <i>Google</i><i>YouTube</i><i>Ambev</i><i>PepsiCo</i><i>BRF</i><i>Boticário</i><i>Casas Bahia</i><i>Accenture</i><i>SUNO</i><i>Instituto Ame Sua Mente</i><i>Fundação Maria Cecilia Souto Vidigal</i><i>Instituto Oya</i>
       </div>
     </div>
   </div>
 
-<div class="divisor-onda" aria-hidden="true"><svg viewBox="0 160 560 155" preserveAspectRatio="none" aria-hidden="true"><path d="M0.0 232.5C-7.5 245.7 -93.2 300.9 0.0 314.5C93.2 328.1 466.2 317.9 559.5 314.0C652.8 310.1 560.9 296.1 559.5 291.0C558.1 285.9 555.1 286.2 551.0 283.5C546.9 280.8 540.8 276.8 535.0 274.5C529.2 272.2 523.0 270.7 516.0 269.5C509.0 268.3 515.2 267.8 493.0 267.5C470.8 267.2 421.0 268.5 383.0 267.5C345.0 266.5 302.2 262.3 265.0 261.5C227.8 260.7 183.0 263.2 160.0 262.5C137.0 261.8 146.2 262.0 127.0 257.5C107.8 253.0 66.2 239.7 45.0 235.5C23.8 231.3 7.5 219.3 0.0 232.5Z" fill="var(--preto)" fill-rule="evenodd" /></svg></div>
+<div class="divisor-onda" aria-hidden="true"><svg viewBox="0 160 560 155" preserveAspectRatio="none" aria-hidden="true"><path d="M0.0 232.5C-7.5 245.7 -93.2 300.9 0.0 314.5C93.2 328.1 466.2 317.9 559.5 314.0C652.8 310.1 560.9 296.1 559.5 291.0C558.1 285.9 555.1 286.2 551.0 283.5C546.9 280.8 540.8 276.8 535.0 274.5C529.2 272.2 523.0 270.7 516.0 269.5C509.0 268.3 515.2 267.8 493.0 267.5C470.8 267.2 421.0 268.5 383.0 267.5C345.0 266.5 302.2 262.3 265.0 261.5C227.8 260.7 183.0 263.2 160.0 262.5C137.0 261.8 146.2 262.0 127.0 257.5C107.8 253.0 66.2 239.7 45.0 235.5C23.8 231.3 7.5 219.3 0.0 232.5Z" fill="var(--preto)" fill-rule="evenodd" /><rect x="-4" y="305" width="568" height="14" fill="var(--preto)"/></svg></div>
 
   <section class="manifesto on-dark">
     <div class="wrap" style="position:relative;z-index:1">
@@ -454,8 +467,8 @@
       <div class="lead-grid">
         <div class="side">
           <span class="eyebrow rv">Explore o Map</span>
-          <h2 class="rv">Veja o que a cultura está dizendo agora.</h2>
-          <p class="rv">Conte para a gente o que você quer fazer com a cultura — e receba uma apresentação do Cultural Code Map com um recorte do seu território.</p>
+          <h2 class="rv">O que está emergindo na cultura agora?</h2>
+          <p class="rv">Diga o que você quer explorar — e receba uma apresentação do Cultural Code Map com um recorte do seu território.</p>
           <div class="sig-mini rv">cultura em movimento<br>para criar estratégias<br>com significado</div>
         </div>
         <form id="lead-form" novalidate>
@@ -469,7 +482,7 @@
               <select name="perfil"><option>Marca</option><option>Agência</option><option>Criador(a)</option><option>Artista</option><option>Outro</option></select>
             </label>
           </div>
-          <label>O que você quer fazer com a cultura?
+          <label>O que você quer explorar?
             <textarea name="mensagem" placeholder="Conte em poucas linhas o desafio ou a curiosidade que te trouxe aqui."></textarea>
           </label>
           <label class="consent">
@@ -546,7 +559,7 @@ document.querySelectorAll('[data-mag]').forEach(function(btn){
 /* trilho (L-22) + tema do trilho */
 (function(){
   var links=document.querySelectorAll('.rail a');
-  var alvos=['#top','#produto','#entregas','#cena','#demo','#contato'].map(function(s){return document.querySelector(s)});
+  var alvos=['#top','#produto','#entregas','#cena','#demo','#quem','#contato'].map(function(s){return document.querySelector(s)});
   function marca(i){links.forEach(function(l,j){l.classList.toggle('aqui',i===j)})}
   alvos.forEach(function(sec,i){
     if(!sec)return;
@@ -580,9 +593,9 @@ document.querySelectorAll('[data-mag]').forEach(function(btn){
 (function(){
   var cv=document.getElementById('ceu');if(!cv)return;
   var ctx=cv.getContext('2d'),dpr=Math.min(devicePixelRatio||1,2),W,H,nos=[],glow=[],mx=-999,my=-999,vivo=false;
-  var NOMES=['MEMÓRIA','FÉ','TRABALHO','AFETO','CORPO','FUTURO','RAIZ','JOGO','PRAZER','PRESSA','CASA','VOZ'];
+  var NOMES=['MEMÓRIA','FÉ','TRABALHO','AFETO','CORPO','FUTURO','RAIZ','JOGO','PRAZER','PRESSA','CASA','VOZ','FAMÍLIA','BELEZA','NATUREZA','TECNOLOGIA','IDENTIDADE','FESTA','COMIDA','SAUDADE'];
   function medir(){W=cv.clientWidth;H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0)}
-  function semear(){nos=[];for(var i=0;i<Math.max(46,Math.floor(W*H/26000));i++)nos.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.16,vy:(Math.random()-.5)*.16,r:Math.random()*1.6+.8,nome:i<NOMES.length?NOMES[i]:null,tensao:i>=NOMES.length&&Math.random()<.06})}
+  function semear(){nos=[];for(var i=0;i<Math.max(54,Math.floor(W*H/21000));i++)nos.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.24,vy:(Math.random()-.5)*.24,r:Math.random()*1.6+.9,nome:i<NOMES.length?NOMES[i]:null,tensao:i>=NOMES.length&&Math.random()<.06})}
   function passo(){
     if(cv.width===0&&cv.clientWidth>0){medir();semear()}
     ctx.clearRect(0,0,W,H);
@@ -590,7 +603,7 @@ document.querySelectorAll('[data-mag]').forEach(function(btn){
     for(i=0;i<nos.length;i++){a=nos[i];
       for(j=i+1;j<nos.length;j++){b=nos[j];
         var dx=a.x-b.x,dy=a.y-b.y,d2=dx*dx+dy*dy;
-        if(d2<16900){var t=1-Math.sqrt(d2)/130;ctx.strokeStyle='rgba(42,51,144,'+t*.55+')';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke()}
+        if(d2<16900){var t=1-Math.sqrt(d2)/130;ctx.strokeStyle='rgba(58,70,180,'+t*.7+')';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke()}
       }
     }
     for(i=glow.length-1;i>=0;i--){var g=glow[i];g.t+=.018;
@@ -601,9 +614,9 @@ document.querySelectorAll('[data-mag]').forEach(function(btn){
     for(i=0;i<nos.length;i++){a=nos[i];
       var dxm=a.x-mx,dym=a.y-my,dm=Math.hypot(dxm,dym);
       if(dm<90&&dm>0){a.x+=dxm/dm*1.4;a.y+=dym/dm*1.4}
-      ctx.fillStyle=a.nome?'rgba(0,185,205,.95)':a.tensao?'rgba(237,45,50,.9)':'rgba(166,168,180,.55)';
+      ctx.fillStyle=a.nome?'rgba(0,196,218,1)':a.tensao?'rgba(237,45,50,.95)':'rgba(178,182,200,.75)';
       ctx.beginPath();ctx.arc(a.x,a.y,a.r,0,7);ctx.fill();
-      if(a.nome){ctx.font='600 9px Montserrat';ctx.fillStyle='rgba(166,168,180,.8)';ctx.fillText(a.nome,a.x+8,a.y+3)}
+      if(a.nome){ctx.font='600 10px Montserrat';ctx.fillStyle='rgba(200,204,220,.95)';ctx.fillText(a.nome,a.x+8,a.y+3)}
       a.x+=a.vx;a.y+=a.vy;
       if(a.x<-10)a.x=W+10;if(a.x>W+10)a.x=-10;if(a.y<-10)a.y=H+10;if(a.y>H+10)a.y=-10;
     }
@@ -617,7 +630,7 @@ document.querySelectorAll('[data-mag]').forEach(function(btn){
   }
   medir();semear();
   if(REDUZ){passo()}
-  else{vis(cv,function(){if(!vivo){vivo=true;passo()}},function(){vivo=false});setInterval(pulso,1400)}
+  else{vis(cv,function(){if(!vivo){vivo=true;passo()}},function(){vivo=false});setInterval(pulso,1000)}
   cv.parentElement.addEventListener('pointermove',function(e){var r=cv.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top});
   cv.parentElement.addEventListener('pointerleave',function(){mx=my=-999});
   var rt;addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){medir();semear()},200)});
@@ -633,7 +646,7 @@ document.querySelectorAll('[data-mag]').forEach(function(btn){
     ['02 · codificar','Os sinais ganham endereço.','Mais de 2 mil códigos culturais organizam o caos em uma taxonomia proprietária.'],
     ['03 · conectar','Os códigos conversam.','Códigos, temas e manifestações se relacionam — padrões começam a aparecer.'],
     ['04 · interpretar','O olhar humano entra.','Especialistas leem tensões, contextos e significados por trás dos padrões.'],
-    ['05 · revelar','Emergem os movimentos.','Narrativas, comportamentos e territórios de oportunidade — sinal virou sentido.']
+    ['05 · revelar','Emergem os movimentos.','Narrativas, comportamentos e territórios de oportunidade. Quando o sinal vira sentido.']
   ];
   var elP=document.getElementById('cenaPasso'),elT=document.getElementById('cenaTitulo'),elX=document.getElementById('cenaTexto'),legAtual=-1;
 
@@ -800,6 +813,23 @@ document.querySelectorAll('[data-count]').forEach(function(el){
     });
   });
   render('saude');
+})();
+
+/* leitura ao vivo — decodificador cíclico */
+(function(){
+  var el=document.getElementById('leituraAlvo');if(!el||REDUZ)return;
+  var FONTES=['conversas nas redes','letras de música','charts e paradas','prêmios e crítica','memes','estreias e bilheteria','livros mais lidos','vídeos em alta','moda e passarelas','games'];
+  var i=0,POOL='◆◇/\\|—·#%&*abcdefghijklmnopqrstuvxz';
+  setInterval(function(){
+    i=(i+1)%FONTES.length;
+    var alvo=FONTES[i],t0=null;
+    (function f(ts){if(!t0)t0=ts;
+      var pr=Math.min(1,(ts-t0)/600),fix=Math.floor(pr*alvo.length),out='';
+      for(var k=0;k<alvo.length;k++)out+=k<fix||alvo[k]===' '?alvo[k]:POOL[Math.floor(Math.random()*POOL.length)];
+      el.textContent=out;
+      if(pr<1)requestAnimationFrame(f);else el.textContent=alvo;
+    })(performance.now());
+  },3400);
 })();
 
 /* form */
