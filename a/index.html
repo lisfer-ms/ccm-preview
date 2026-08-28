@@ -360,7 +360,6 @@
         <h3 id="cenaTitulo">Milhões de sinais soltos.</h3>
         <p id="cenaTexto">Dados e manifestações da cultura são capturados continuamente — ainda sem forma.</p>
       </div>
-      <div class="dica">continue rolando — a cena acompanha você</div>
     </div>
   </section>
 
@@ -656,11 +655,12 @@ document.querySelectorAll('[data-mag]').forEach(function(btn){
     if(W<2||H<2)return [];
     var off=document.createElement('canvas'),o=off.getContext('2d');
     off.width=W;off.height=H;
-    var fs=Math.min(H*.42,W/(word.length*.62));
+    var fs=Math.min(H*.42,W/(word.length*.66));
     o.font='800 '+fs+'px "Bodoni Moda", Georgia, serif';
     o.textAlign='center';o.textBaseline='middle';
     o.fillText(word,W/2,H/2-H*.04);
-    var img=o.getImageData(0,0,W,H).data,out=[],passo=Math.max(5,Math.floor(W/170));
+    o.lineWidth=Math.max(2.5,fs*.028);o.strokeStyle='#fff';o.strokeText(word,W/2,H/2-H*.04);
+    var img=o.getImageData(0,0,W,H).data,out=[],passo=Math.max(4,Math.floor(W/210));
     for(var y=0;y<H;y+=passo)for(var x=0;x<W;x+=passo)
       if(img[(y*W+x)*4+3]>128)out.push([x+(Math.random()-.5)*2,y+(Math.random()-.5)*2]);
     return out;
