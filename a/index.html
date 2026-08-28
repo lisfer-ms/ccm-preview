@@ -47,15 +47,17 @@
 
   /* L-22 trilho */
   .rail{position:fixed;right:22px;top:50%;transform:translateY(-50%);z-index:60;display:grid;gap:13px}
-  @media(max-width:1440px){.rail{display:none}}
-  .rail a{display:flex;align-items:center;gap:9px;flex-direction:row-reverse;text-decoration:none;color:var(--giz-2);font-weight:600;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;opacity:.85}
+  @media(max-width:1200px){.rail{display:none}}
+  .rail a{position:relative;display:flex;justify-content:flex-end;align-items:center;text-decoration:none;color:var(--giz-2);font-weight:600;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;opacity:.85;padding:2px 0}
   .rail a i{width:18px;height:1.5px;background:currentColor;transition:width .3s}
   .rail a.aqui{color:var(--amarelo);opacity:1}
   .rail a.aqui i{width:34px}
-  .rail a span{opacity:0;transition:opacity .2s}
-  .rail a:hover span,.rail a.aqui span{opacity:1}
+  .rail a span{position:absolute;right:44px;top:50%;transform:translate(6px,-50%);opacity:0;transition:opacity .2s,transform .2s;white-space:nowrap;background:rgba(11,11,13,.9);padding:.4em .7em;pointer-events:none}
+  .rail a:hover span,.rail a:focus-visible span,.rail a.aqui span{opacity:1;transform:translate(0,-50%)}
+  .rail a:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+  body.na-luz .rail a span{background:rgba(255,255,255,.92)}
   body.na-luz .rail a{color:var(--tinta-2)}
-  body.na-luz .rail a.aqui{color:var(--vermelho)}
+  body.na-luz .rail a.aqui{color:var(--azul)}
 
   /* L-11 cursor */
   .cursor{position:fixed;left:0;top:0;width:10px;height:10px;border-radius:50%;background:var(--amarelo);pointer-events:none;z-index:200;transform:translate(-50%,-50%);transition:width .25s,height .25s,background .25s,border .25s;mix-blend-mode:difference}
@@ -240,13 +242,15 @@
   .frow{display:grid;grid-template-columns:1fr 1fr;gap:18px}
   @media(max-width:560px){.frow{grid-template-columns:1fr}}
   label{display:grid;gap:7px;font-weight:600;font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--giz-2)}
-  input,select,textarea{font-family:var(--sans);font-size:1rem;color:var(--giz);background:var(--preto);border:1px solid var(--risco-inv);border-radius:0;padding:.85em .9em;width:100%;box-sizing:border-box}
+  input,select,textarea{font-family:var(--sans);font-size:1rem;color:var(--giz);background:var(--preto);border:1px solid rgba(244,244,246,.38);border-radius:0;padding:.85em .9em;width:100%;box-sizing:border-box}
   input:focus,select:focus,textarea:focus{outline:2px solid var(--ciano);outline-offset:1px;border-color:transparent}
   textarea{min-height:96px;resize:vertical}
   .consent{display:flex;gap:12px;align-items:flex-start;font-weight:400;font-size:.8rem;letter-spacing:0;text-transform:none;color:var(--giz-2);line-height:1.5}
   .consent input{width:auto;margin-top:3px;accent-color:var(--amarelo)}
   .form-msg{font-size:.85rem;color:var(--ciano);min-height:1.2em;margin:0}
   form .btn-primario{border:none;justify-self:start}
+  form .btn-primario[disabled]{opacity:.55;cursor:default}
+  .form-msg.erro{color:#FF8A8D}
 
 
   .divisor-onda{background:var(--branco);line-height:0}
@@ -272,6 +276,7 @@
     .hero h1 .w>span{transform:none}
     .hero p,.hero-actions{opacity:1;transition:none}
     .demo-links span{animation:none;opacity:1;transform:none}
+    .coleta .vivo{animation:none}
     .mq>div{animation:none}
     .cena{height:auto}
     .cena .palco{position:relative;height:70vh}
@@ -375,7 +380,7 @@
   <!-- ============ CENA CENTRAL ============ -->
   <section class="cena" id="cena" aria-label="Do sinal ao significado — cena animada">
     <div class="palco">
-      <canvas id="cenaCv"></canvas>
+      <canvas id="cenaCv" aria-hidden="true"></canvas>
       <div class="titulo-cena"><span class="eyebrow">Como funciona</span></div>
       <div class="legenda">
         <div class="passo" id="cenaPasso">01 · coletar</div>
@@ -406,12 +411,12 @@
       <p class="lede rv">Escolha um código e acompanhe a rede de significados que ele revela.</p>
 
       <div class="demo-box rv">
-        <div class="demo-tabs" role="tablist" aria-label="Escolha um código cultural">
+        <div class="demo-tabs" role="tablist" aria-label="Escolha um código cultural" id="demo-tablist">
           <button class="demo-tab" role="tab" aria-selected="true" data-code="saude" data-cursor="abrir">Saúde mental</button>
           <button class="demo-tab" role="tab" aria-selected="false" data-code="trabalho" data-cursor="abrir">Trabalho</button>
           <button class="demo-tab" role="tab" aria-selected="false" data-code="fe" data-cursor="abrir">Fé</button>
         </div>
-        <div class="demo-stage">
+        <div class="demo-stage" id="demo-stage" role="tabpanel">
           <div class="demo-center" id="demo-center">SAÚDE MENTAL</div>
           <div class="demo-connector">se conecta com</div>
           <div class="demo-links" id="demo-links"></div>
@@ -426,7 +431,7 @@
 
   <section class="on-paper" id="quem" data-luz>
     <div class="wrap">
-      <p class="pull rv">Marcas não competem apenas por atenção. <em>Competem por relevância.</em> Quem entende a cultura antes, encontra espaços de relevância antes.</p>
+      <p class="pull rv">Marcas não competem apenas por atenção. <em>Competem por relevância.</em> Quem entende a cultura antes encontra espaços de relevância antes.</p>
       <span class="eyebrow rv">Para quem</span>
       <h2 class="rv">Os caminhos que o mapa cultural pode abrir para você.</h2>
 
@@ -507,7 +512,7 @@
           <div class="frow">
             <label>Empresa / projeto<input type="text" name="empresa" autocomplete="organization"></label>
             <label>Você é…
-              <select name="perfil"><option>Marca</option><option>Agência</option><option>Criador(a)</option><option>Artista</option><option>Instituto</option><option>Outro</option></select>
+              <select name="perfil"><option value="" selected>Selecione…</option><option>Marca</option><option>Agência</option><option>Criador(a)</option><option>Artista</option><option>Instituto</option><option>Outro</option></select>
             </label>
           </div>
           <label>O que você quer explorar?
@@ -547,17 +552,16 @@ if(!CSS.supports('animation-timeline: view()'))document.documentElement.classLis
   var form=document.getElementById('lead-form'),msg=document.getElementById('form-msg'),btn=form.querySelector('button[type=submit]');
   form.addEventListener('submit',function(e){
     e.preventDefault();
-    if(form._honey&&form._honey.value)return;
-    if(!form.nome.value.trim()||!form.email.value.trim()){msg.textContent='Preencha nome e e-mail para continuar.';return}
-    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.value.trim())){msg.textContent='Confira o e-mail digitado.';return}
-    if(!form.lgpd.checked){msg.textContent='Precisamos do seu consentimento (LGPD) para entrar em contato.';return}
-    msg.textContent='Enviando…';btn.disabled=true;
+    if(!form.nome.value.trim()||!form.email.value.trim()){msg.classList.add('erro');msg.textContent='Preencha nome e e-mail para continuar.';return}
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.value.trim())){msg.classList.add('erro');msg.textContent='Confira o e-mail digitado.';return}
+    if(!form.lgpd.checked){msg.classList.add('erro');msg.textContent='Precisamos do seu consentimento (LGPD) para entrar em contato.';return}
+    msg.classList.remove('erro');msg.textContent='Enviando…';btn.disabled=true;
     fetch('https://formsubmit.co/ajax/contato@wiz.ag',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({
-      _subject:'Novo lead — Cultural Code Map',_template:'table',_cc:'vanessa@wiz.ag,vanessayadoya@wiz.ag,cintia@wiz.ag,machado@wiz.ag',
-      nome:form.nome.value.trim(),email:form.email.value.trim(),empresa:form.empresa.value.trim(),perfil:form.perfil.value,mensagem:form.mensagem.value.trim(),consentimento_lgpd:'sim'})})
+      _subject:'Novo lead — Cultural Code Map',_template:'table',_honey:form._honey.value,_cc:'vanessa@wiz.ag,vanessayadoya@wiz.ag,cintia@wiz.ag,machado@wiz.ag',
+      nome:form.nome.value.trim(),email:form.email.value.trim(),empresa:form.empresa.value.trim(),perfil:form.perfil.value||'não informado',mensagem:form.mensagem.value.trim(),consentimento_lgpd:'sim'})})
     .then(function(r){if(!r.ok)throw 0;return r.json()})
     .then(function(d){if(!d||String(d.success)!=='true')throw 0;msg.textContent='✓ Recebido! Vamos te escrever em breve.';form.reset()})
-    .catch(function(){msg.innerHTML='Não foi possível enviar agora — escreva para <a href="mailto:contato@wiz.ag" style="color:var(--ciano)">contato@wiz.ag</a>.'})
+    .catch(function(){msg.classList.add('erro');msg.innerHTML='Não foi possível enviar agora — escreva para <a href="mailto:contato@wiz.ag" style="color:var(--ciano)">contato@wiz.ag</a>.'})
     .finally(function(){btn.disabled=false});
   });
 })();
@@ -839,7 +843,7 @@ document.querySelectorAll('[data-count]').forEach(function(el){
 
 /* demo com view transitions (L-20) */
 (function(){
-  var CORES={'Tensões':'#ED2D32','Comportamentos':'#00B9CD','Narrativas':'#FFDC34','Manifestações':'#2A3390'};
+  var CORES={'Tensões':'#ED2D32','Comportamentos':'#00B9CD','Narrativas':'#FFDC34','Manifestações':'#6F7BE0'};
   var DATA={
     saude:{center:'SAÚDE MENTAL',links:['TRABALHO','TECNOLOGIA','IDENTIDADE','RELACIONAMENTOS','BEM-ESTAR'],
       reveal:{'Tensões':'Performance × exaustão.','Comportamentos':'Desaceleração, autocuidado, busca por equilíbrio.','Narrativas':'“Não preciso dar conta de tudo.”','Manifestações':'Vídeos · músicas · livros · creators · conversas.'}},
@@ -860,6 +864,12 @@ document.querySelectorAll('[data-count]').forEach(function(el){
       c.appendChild(h);c.appendChild(p);elR.appendChild(c);
     });
   }
+  tabs.forEach(function(t){t.setAttribute('aria-controls','demo-stage')});
+  document.getElementById('demo-tablist').addEventListener('keydown',function(e){
+    if(e.key!=='ArrowRight'&&e.key!=='ArrowLeft')return;
+    var arr=Array.prototype.slice.call(tabs),i=arr.findIndex(function(t){return t.getAttribute('aria-selected')==='true'});
+    var n=arr[(i+(e.key==='ArrowRight'?1:arr.length-1))%arr.length];n.focus();n.click();e.preventDefault();
+  });
   tabs.forEach(function(t){
     t.addEventListener('click',function(){
       tabs.forEach(function(o){o.setAttribute('aria-selected','false')});
