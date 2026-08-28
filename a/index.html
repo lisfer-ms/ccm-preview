@@ -843,7 +843,7 @@ document.querySelectorAll('[data-count]').forEach(function(el){
     if(!form.lgpd.checked){msg.textContent='Precisamos do seu consentimento (LGPD) para entrar em contato.';return}
     msg.textContent='Enviando…';btn.disabled=true;
     fetch('https://formsubmit.co/ajax/machado@wiz.ag',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({
-      _subject:'Novo lead — Cultural Code Map',_template:'table',_cc:'vanessa@wiz.ag,vanessayadoya@wiz.ag,cintia@wiz.ag',
+      _subject:'Novo lead — Cultural Code Map',_template:'table',_cc:'vanessa@wiz.ag,vanessayadoya@wiz.ag,cintia@wiz.ag,contato@wiz.ag',
       nome:form.nome.value.trim(),email:form.email.value.trim(),empresa:form.empresa.value.trim(),perfil:form.perfil.value,mensagem:form.mensagem.value.trim(),consentimento_lgpd:'sim'})})
     .then(function(r){if(!r.ok)throw 0;return r.json()})
     .then(function(){msg.textContent='✓ Recebido! Vamos te escrever em breve.';form.reset()})
