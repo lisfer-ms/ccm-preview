@@ -441,8 +441,8 @@
 
   <div class="provas" data-luz>
     <div class="wrap">
-      <div class="num rv"><b data-count="2000">0</b><span>+ códigos culturais</span></div>
-      <div class="num rv"><b data-count="84">0</b><span>fontes de cultura mapeadas</span></div>
+      <div class="num rv"><b data-count="2000" data-sufixo="+">0</b><span>códigos culturais</span></div>
+      <div class="num rv"><b data-count="80" data-sufixo="+">0</b><span>fontes de dados</span></div>
       <div class="num rv"><b>milhões</b><span>de sinais em leitura contínua</span></div>
       <div class="clientes rv">
         <span class="clientes-titulo">Leituras culturais já entregues para</span>
@@ -773,10 +773,10 @@ document.querySelectorAll('[data-count]').forEach(function(el){
   var alvo=+el.dataset.count,feito=false;
   vis(el,function(){
     if(feito)return;feito=true;
-    if(REDUZ){el.textContent=alvo.toLocaleString('pt-BR');return}
+    if(REDUZ){el.textContent=alvo.toLocaleString('pt-BR')+(el.dataset.sufixo||'');return}
     var t0=null;
     (function f(ts){if(!t0)t0=ts;var p=Math.min(1,(ts-t0)/1400);p=1-Math.pow(1-p,3);
-      el.textContent=Math.round(alvo*p).toLocaleString('pt-BR');
+      el.textContent=Math.round(alvo*p).toLocaleString('pt-BR')+(el.dataset.sufixo||'');
       if(p<1)requestAnimationFrame(f);
     })(performance.now());
   });
