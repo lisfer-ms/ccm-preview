@@ -472,6 +472,7 @@
           <div class="sig-mini rv">cultura em movimento<br>para criar estratégias<br>com significado</div>
         </div>
         <form id="lead-form" novalidate>
+          <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="position:absolute;left:-5000px" aria-hidden="true">
           <div class="frow">
             <label>Nome<input type="text" name="nome" autocomplete="name" required></label>
             <label>E-mail<input type="email" name="email" autocomplete="email" required></label>
@@ -832,15 +833,22 @@ document.querySelectorAll('[data-count]').forEach(function(el){
   },3400);
 })();
 
-/* form */
+/* form → FormSubmit (contato@wiz.ag, cc machado@wiz.ag) */
 (function(){
-  var form=document.getElementById('lead-form'),msg=document.getElementById('form-msg');
+  var form=document.getElementById('lead-form'),msg=document.getElementById('form-msg'),btn=form.querySelector('button[type=submit]');
   form.addEventListener('submit',function(e){
     e.preventDefault();
+    if(form._honey&&form._honey.value)return;
     if(!form.nome.value.trim()||!form.email.value.trim()){msg.textContent='Preencha nome e e-mail para continuar.';return}
     if(!form.lgpd.checked){msg.textContent='Precisamos do seu consentimento (LGPD) para entrar em contato.';return}
-    msg.textContent='✓ Recebido! (rascunho — nesta versão o envio ainda não está integrado)';
-    form.reset();
+    msg.textContent='Enviando…';btn.disabled=true;
+    fetch('https://formsubmit.co/ajax/contato@wiz.ag',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({
+      _subject:'Novo lead — Cultural Code Map',_template:'table',_cc:'machado@wiz.ag',
+      nome:form.nome.value.trim(),email:form.email.value.trim(),empresa:form.empresa.value.trim(),perfil:form.perfil.value,mensagem:form.mensagem.value.trim(),consentimento_lgpd:'sim'})})
+    .then(function(r){if(!r.ok)throw 0;return r.json()})
+    .then(function(){msg.textContent='✓ Recebido! Vamos te escrever em breve.';form.reset()})
+    .catch(function(){msg.innerHTML='Não foi possível enviar agora — escreva para <a href="mailto:contato@wiz.ag" style="color:var(--ciano)">contato@wiz.ag</a>.'})
+    .finally(function(){btn.disabled=false});
   });
 })();
 
